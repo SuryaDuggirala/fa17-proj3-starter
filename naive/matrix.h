@@ -36,4 +36,3 @@ void get_matrix_as_array(float *arr, matrix *mat);
 matrix* arr_to_matrix(float *arr, int rows, int cols);
 float get_loc(matrix *mat, int row, int col);
 void matrix_transpose(matrix* m, matrix* dst);
-

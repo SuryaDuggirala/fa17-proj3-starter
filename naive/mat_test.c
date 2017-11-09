@@ -1,8 +1,6 @@
 #include "matrix.h"
 #include "../testing/shared.c"
 
-void (*matrix_functions[NUM_OPS]) = {dot_product, matrix_power, matrix_multiply, matrix_scale, matrix_add};
-
 matrix* generate_random_matrix(int r, int c) {
 	matrix *m;
 	allocate_matrix(&m, r, c);
@@ -34,6 +32,12 @@ void write_matrices_to_file(matrix** matrices, int count, const char* filename) 
 }
 
 matrix** test_read_write_all_dims() {
+	/*  
+		Randomly generates test matrices
+		Writes those matrices to a file
+		Reads those matrices from the file and checks equality as a sanity check
+		returns randomly generated test matrices
+	*/
 	int i, count, dim_idx;
 	count = DEFAULT_NUM_EACH_SIZE * NUM_SIZES;
 	matrix** write_matrices = malloc(sizeof(matrix*) * count);
@@ -61,39 +65,16 @@ void write_duration(long duration) {
 }	
 
 int main() {
-	// matrix *m1, *m2, *m3, *m4;
-	// float ans;
-
-	// allocate_matrix(&m1, 2, 2);
-	// set_loc(m1, 0, 0, 3);
-	// set_loc(m1, 1, 1, 4);
-	// print_matrix(m1);
-
-	// allocate_matrix(&m2, 2, 2);
-	// matrix_power(m1, 2, m2);
-	// print_matrix(m2);
-	// matrix_scale(m2, 2, m2);
-	// print_matrix(m2);
-	// print_multiplication(m1, m2);
-
-
-	// allocate_matrix(&m3, 2, 1);
-	// allocate_matrix(&m4, 2, 1);
-	// set_loc(m3, 0, 0, 1);
-	// set_loc(m4, 0, 0, 1);
-	// dot_product(m3, m4, &ans);
-	// printf("%.2f\n", ans);
-
 	long start, end, duration;
 	duration = 0;
 	matrix **matrix_ans, **test_matrices; 
-	int num_results;// = DEFAULT_NUM_EACH_SIZE*2 + (DEFAULT_NUM_EACH_SIZE * (DEFAULT_NUM_EACH_SIZE-1)/2) * 2;
+	int num_results;
 
 	test_matrices = test_read_write_all_dims();
 	printf("%s\n", "READING AND WRITING SANITY CHECK COMPLETE");
 
 	start = timer();
-	num_results = perform_all_ops(test_matrices, DEFAULT_NUM_EACH_SIZE * NUM_SIZES, &matrix_ans); //int perform_all_ops(matrix** matrices, int count, matrix ***matrix_ans_pointer)
+	num_results = perform_all_ops(test_matrices, DEFAULT_NUM_EACH_SIZE * NUM_SIZES, &matrix_ans);
 	end = timer();
 	printf("Start is: %li, End is: %li\n", start, end);
 	duration += (end-start);

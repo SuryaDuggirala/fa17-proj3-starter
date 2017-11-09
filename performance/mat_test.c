@@ -7,7 +7,6 @@ long read_naive_duration() {
 	long naive_duration;
 	fscanf(f, "%li\n", &naive_duration);
 	fclose(f);
-	// printf("%lu\n", naive_duration);
 	return naive_duration;
 }	
 
@@ -16,8 +15,6 @@ int main() {
 	double speedup;
 	long start, end, duration, naive_duration;
 	int equal, num_answers;
-	// AlmostEqualUlps(500.0, 501.0, 15);
-	// return 0;
 	read_matrices = read_matrices_from_file(all_matrices_filename);
 	start = timer();
 	num_answers = perform_all_ops(read_matrices, DEFAULT_NUM_EACH_SIZE * NUM_SIZES, &ans_matrices);
