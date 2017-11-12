@@ -29,10 +29,11 @@ test2:
 	./mat_test_2
 
 clean:
-	rm -rf mat_test* tmp matrix testing/tmp
+	rm -rf mat_test*
 	bash install/uninstall.sh
 
 very_clean: clean
+	rm -rf mat_test* tmp matrix testing/tmp
 	bash install/delete.sh
 
 .PHONY: build
