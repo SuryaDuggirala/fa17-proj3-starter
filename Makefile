@@ -20,6 +20,7 @@ speedup: build
 testAll: test1 test2
 
 test1: clean
+	rm -rf tmp
 	mkdir tmp
 	$(CC) $(CFLAGS) ./naive/matrix.c ./naive/mat_test.c -o mat_test_1
 	./mat_test_1
